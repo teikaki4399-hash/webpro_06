@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>アニメを追加する</title>
+</head>
+<body>
+    <h2>アニメを追加する</h2>
+    <form action="/anime_add">
+        <label for="title">タイトル</label>
+        <input type="text" name="title" id="title" required>
+
+        <label for="year">放送開始年</label>
+        <input type="number" name="year" id="year" required>
+
+        <label for="studio">制作会社</label>
+        <input type="text" name="studio" id="studio" required>
+
+        <input type="submit" value="登録">
+    </form>
+    <p><a href="/anime">一覧を見る</a></p>
+</body>
+</html>

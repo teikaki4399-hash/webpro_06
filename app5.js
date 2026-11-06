@@ -4,6 +4,57 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use("/public", express.static(__dirname + "/public"));
 
+// ===== 第8回：京葉線の駅（授業の例） =====
+let station = [
+  { id:1, code:"JE01", name:"東京駅"},
+  { id:2, code:"JE07", name:"舞浜駅"},
+  { id:3, code:"JE12", name:"新習志野駅"},
+  { id:4, code:"JE13", name:"幕張豊砂駅"},
+  { id:5, code:"JE14", name:"海浜幕張駅"},
+  { id:6, code:"JE05", name:"新浦安駅"},
+];
+
+app.get("/keiyo", (req, res) => {
+  // 本来ならここにDBとのやり取りが入る
+  res.render('db2', { data: station });
+});
+
+app.get("/keiyo_add", (req, res) => {
+  let id = req.query.id;
+  let code = req.query.code;
+  let name = req.query.name;
+  let newdata = { id: id, code: code, name: name };
+  station.push( newdata );
+  // (1) 登録後は入力画面に戻す（続けて登録しやすい）
+  res.redirect('/public/keiyo_add.html');
+});
+
+// ===== 第8回 やってみよう(2)(3)：アニメ一覧 =====
+let anime = [
+  { id:1, title:"鬼滅の刃", year:2019, studio:"ufotable" },
+  { id:2, title:"進撃の巨人", year:2013, studio:"WIT STUDIO" },
+  { id:3, title:"呪術廻戦", year:2020, studio:"MAPPA" },
+  { id:4, title:"SPY×FAMILY", year:2022, studio:"WIT STUDIO / CloverWorks" },
+  { id:5, title:"ぼっち・ざ・ろっく！", year:2022, studio:"CloverWorks" },
+  { id:6, title:"葬送のフリーレン", year:2023, studio:"マッドハウス" },
+];
+
+// 一覧表示
+app.get("/anime", (req, res) => {
+  res.render('anime', { data: anime });
+});
+
+// 追加：IDは自動で振り，登録後は一覧を表示する
+app.get("/anime_add", (req, res) => {
+  let id = anime.length + 1;
+  let title = req.query.title;
+  let year = req.query.year;
+  let studio = req.query.studio;
+  let newdata = { id: id, title: title, year: year, studio: studio };
+  anime.push( newdata );
+  res.render('anime', { data: anime });
+});
+
 app.get("/hello1", (req, res) => {
   const message1 = "Hello world";
   const message2 = "Bon jour";
