@@ -16,3 +16,19 @@
 ### (4) htmlファイルとejsファイルの使い分け
 htmlファイルは，最初の入力フォームのように内容が変わらない静的なページに使い，public フォルダに置く．
 ejsファイルは，じゃんけんの結果や勝ち数のように，サーバのプログラムの処理結果によって内容が変わる動的なページに使い，views フォルダに置く．サーバ側で `res.render()` を使い，値を埋め込んでからブラウザに返す．
+
+## 第9回 一覧表示と詳細表示
+
+### やってみよう(2) レポート用システムの設計
+- `design.md`：開発する3つのシステム（アニメ一覧，ゲームの記録，筋トレメニュー）の対象，ページ遷移，スキーマ
+
+### 授業の例
+- `app5.js`：`station2`（項目：id, code, name, change, passengers, distance）と `/keiyo2`（一覧），`/keiyo2/:number`（詳細）を追加
+- `views/keiyo2.ejs`：一覧表示（駅名から詳細ページへリンク）
+- `views/keiyo2_detail.ejs`：詳細表示
+- 確認方法：`node app5.js` を実行し，http://localhost:8080/keiyo2 を開く
+
+### やってみよう(3) station2へのデータ追加
+- `public/keiyo2_add.html`：入力フォーム（駅コード，駅名，乗り換え線，乗降客数，東京駅からの距離）
+- `app5.js`：`/keiyo2_add` を追加．IDは自動で振り，乗降客数と距離は `Number()` で数値に変換してから追加する．登録後は一覧（/keiyo2）に戻る
+- 確認方法：http://localhost:8080/public/keiyo2_add.html から登録する
